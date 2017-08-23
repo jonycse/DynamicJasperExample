@@ -87,21 +87,21 @@ public class SimpleReport extends BaseReport {
     @Override
     public JRDataSource getDataSource() {
         List<Persona> lista = new ArrayList<Persona>();
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= 50; i++) {
             Persona persona = new Persona();
             persona.setName("Bob");
             persona.setEmail("bob" + i + "@gmail.com");
             persona.setMobile("01757-45848" + i);
             lista.add(persona);
         }
-        for (int i = 0; i <= 9; i++) {
+        for (int i = 0; i <= 90; i++) {
             Persona persona = new Persona();
             persona.setName("Alice");
             persona.setEmail("alice" + i + "@gmail.com");
 //			persona.setMobile("01757-45848" + i);
             lista.add(persona);
         }
-        for (int i = 0; i <= 3; i++) {
+        for (int i = 0; i <= 30; i++) {
             Persona persona = new Persona();
             persona.setName("Tom");
 //			persona.setEmail("tom" + i+"@gmail.com");
