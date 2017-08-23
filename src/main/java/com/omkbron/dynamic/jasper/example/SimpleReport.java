@@ -22,73 +22,95 @@ import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn;
 
 public class SimpleReport extends BaseReport {
 
-	private static final Logger logger = Logger.getLogger(SimpleReport.class);
-	
-	@Override
-	public DynamicReport buildReport() throws Exception {
-		logger.debug("Build report");
-		FastReportBuilder builder = new FastReportBuilder();
-		builder.setMargins(20, 40, 30, 30);
-		builder.setDetailHeight(10);
-		builder.setTitle("Babel report");
-		builder.setSubtitle("Generated on: " + new Date());
-		builder.addColumn("Name", "name", String.class.getName(), 30);
-		builder.addColumn("Email", "email", String.class.getName(), 45);
-		builder.addColumn("Mobile", "mobile", String.class.getName(), 45);
-		builder.addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_FOOTER, AutoText.ALIGMENT_RIGHT);
-		builder.setPrintBackgroundOnOddRows(true);
-		builder.setUseFullPageWidth(true);
-		GroupBuilder gb1 = new GroupBuilder();
-		
-		DJGroup group1 = gb1.setCriteriaColumn((PropertyColumn) builder.getColumn(0))
-				.setGroupLayout(GroupLayout.VALUE_IN_HEADER)
-				.build();
-		
-		builder.addGroup(group1);
-		getParams().put("paramAlgo", "Monthly");
-		builder.setTemplateFile("template-report.jrxml");
-		return builder.build();
-	}
+    private ReportType reportType = ReportType.PDF;
 
-	private Object getDataSourceReport() {
-		List<Persona> lista = new ArrayList<Persona>();
-		for (int i = 0; i <= 5; i++) {
-			Persona persona = new Persona();
-			persona.setName("Omar");
-			persona.setEmail("Velasco" + i);
-			persona.setMobile("Peña" + i);
-			lista.add(persona);
-		}
-	return lista;
-}
+    public SimpleReport(ReportType reportType) {
+        this.reportType = reportType;
+    }
 
-	@Override
-	public JRDataSource getDataSource() {
-		List<Persona> lista = new ArrayList<Persona>();
-		for (int i = 0; i <= 5; i++) {
-			Persona persona = new Persona();
-			persona.setName("Bob");
-			persona.setEmail("bob" + i+"@gmail.com");
-			persona.setMobile("01757-45848" + i);
-			lista.add(persona);
-		}
-		for (int i = 0; i <= 9; i++) {
-			Persona persona = new Persona();
-			persona.setName("Alice");
-			persona.setEmail("alice" + i+"@gmail.com");
+    private static final Logger logger = Logger.getLogger(SimpleReport.class);
+
+    @Override
+    public DynamicReport buildReport() throws Exception {
+
+        FastReportBuilder builder = new FastReportBuilder();
+        builder.setMargins(20, 40, 30, 30);
+        builder.setDetailHeight(10);
+        builder.setTitle("Babel report");
+        builder.setSubtitle("Generated on: " + new Date());
+        builder.addColumn("Name", "name", String.class.getName(), 30);
+        builder.addColumn("Email", "email", String.class.getName(), 45);
+        builder.addColumn("Mobile", "mobile", String.class.getName(), 45);
+
+
+
+        if (reportType.equals(ReportType.PDF)) {
+            // for pagination
+            builder.addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_FOOTER, AutoText.ALIGMENT_RIGHT);
+
+            builder.setPrintBackgroundOnOddRows(true);
+            builder.setUseFullPageWidth(true);
+            GroupBuilder gb1 = new GroupBuilder();
+
+            DJGroup group1 = gb1.setCriteriaColumn((PropertyColumn) builder.getColumn(0))
+                    .setGroupLayout(GroupLayout.VALUE_IN_HEADER)
+                    .build();
+
+            builder.addGroup(group1);
+            getParams().put("paramAlgo", "Monthly");
+            builder.setTemplateFile("template-report.jrxml");
+        } else if (reportType.equals(ReportType.EXCEL)) {
+            builder.setPrintColumnNames(true);
+            builder.setIgnorePagination(true); //for Excel, we may dont want pagination, just a plain list
+            builder.setMargins(0, 0, 0, 0);
+            builder.setTitle("November 2006 sales report");
+            builder.setSubtitle("This report was generated at " + new Date());
+            builder.setUseFullPageWidth(true);
+            builder.setPrintColumnNames(true);
+            builder.setIgnorePagination(true); //for Excel, we may dont want pagination, just a plain list
+        }
+        return builder.build();
+    }
+
+    private Object getDataSourceReport() {
+        List<Persona> lista = new ArrayList<Persona>();
+        for (int i = 0; i <= 5; i++) {
+            Persona persona = new Persona();
+            persona.setName("Omar");
+            persona.setEmail("Velasco" + i);
+            persona.setMobile("Peña" + i);
+            lista.add(persona);
+        }
+        return lista;
+    }
+
+    @Override
+    public JRDataSource getDataSource() {
+        List<Persona> lista = new ArrayList<Persona>();
+        for (int i = 0; i <= 5; i++) {
+            Persona persona = new Persona();
+            persona.setName("Bob");
+            persona.setEmail("bob" + i + "@gmail.com");
+            persona.setMobile("01757-45848" + i);
+            lista.add(persona);
+        }
+        for (int i = 0; i <= 9; i++) {
+            Persona persona = new Persona();
+            persona.setName("Alice");
+            persona.setEmail("alice" + i + "@gmail.com");
 //			persona.setMobile("01757-45848" + i);
-			lista.add(persona);
-		}
-		for (int i = 0; i <= 3; i++) {
-			Persona persona = new Persona();
-			persona.setName("Tom");
+            lista.add(persona);
+        }
+        for (int i = 0; i <= 3; i++) {
+            Persona persona = new Persona();
+            persona.setName("Tom");
 //			persona.setEmail("tom" + i+"@gmail.com");
-			persona.setMobile("01505-45897" + i);
-			lista.add(persona);
-		}
-		JRDataSource dataSource = new JRBeanCollectionDataSource(lista);
-		return dataSource;
-	}
-	
-	
+            persona.setMobile("01505-45897" + i);
+            lista.add(persona);
+        }
+        JRDataSource dataSource = new JRBeanCollectionDataSource(lista);
+        return dataSource;
+    }
+
+
 }

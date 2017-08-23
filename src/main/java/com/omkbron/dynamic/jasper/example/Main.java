@@ -11,7 +11,7 @@ public class Main {
 	
 	public static void main(String[] args) throws Exception {
 		logger.info("Dynamic jasper example");
-		SimpleReport report = new SimpleReport();
+		SimpleReport report = new SimpleReport(ReportType.PDF);
 		report.generateReport();
 		JasperExportManager.exportReportToPdfFile(report.getJasperPrint(), "report.pdf");
 	}

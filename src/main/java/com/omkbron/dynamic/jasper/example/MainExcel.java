@@ -16,7 +16,7 @@ public class MainExcel {
 	public static void main(String[] args) throws Exception {
 
 		System.out.println("======== Excel ======");
-		SimpleReport report = new SimpleReport();
+		SimpleReport report = new SimpleReport(ReportType.EXCEL);
 		report.generateReport();
 
 		String path="report.xls";
