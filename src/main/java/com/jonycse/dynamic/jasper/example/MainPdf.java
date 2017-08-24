@@ -1,4 +1,4 @@
-package com.omkbron.dynamic.jasper.example;
+package com.jonycse.dynamic.jasper.example;
 
 import net.sf.jasperreports.engine.JasperExportManager;
 

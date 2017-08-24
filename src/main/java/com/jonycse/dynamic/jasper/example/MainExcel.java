@@ -1,7 +1,6 @@
-package com.omkbron.dynamic.jasper.example;
+package com.jonycse.dynamic.jasper.example;
 
 import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import org.apache.log4j.Logger;

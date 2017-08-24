@@ -1,4 +1,4 @@
-package com.omkbron.dynamic.jasper.example;
+package com.jonycse.dynamic.jasper.example;
 
 public class Persona {
 	private String name;

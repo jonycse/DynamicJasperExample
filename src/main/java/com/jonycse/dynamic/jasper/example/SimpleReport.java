@@ -1,4 +1,4 @@
-package com.omkbron.dynamic.jasper.example;
+package com.jonycse.dynamic.jasper.example;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,12 +11,9 @@ import org.apache.log4j.Logger;
 
 import ar.com.fdvs.dj.domain.AutoText;
 import ar.com.fdvs.dj.domain.DynamicReport;
-import ar.com.fdvs.dj.domain.Style;
-import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
 import ar.com.fdvs.dj.domain.builders.GroupBuilder;
 import ar.com.fdvs.dj.domain.constants.GroupLayout;
-import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 import ar.com.fdvs.dj.domain.entities.DJGroup;
 import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn;
 
