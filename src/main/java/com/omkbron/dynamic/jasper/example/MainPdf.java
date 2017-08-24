@@ -2,12 +2,11 @@ package com.omkbron.dynamic.jasper.example;
 
 import net.sf.jasperreports.engine.JasperExportManager;
 
-import net.sf.jasperreports.engine.export.JRXlsExporter;
 import org.apache.log4j.Logger;
 
-public class Main {
+public class MainPdf {
 	
-	private static final Logger logger = Logger.getLogger(Main.class);
+	private static final Logger logger = Logger.getLogger(MainPdf.class);
 	
 	public static void main(String[] args) throws Exception {
 		logger.info("Dynamic jasper example");
