@@ -39,6 +39,7 @@ public class SimpleReport extends BaseReport {
         builder.addColumn("Email", "email", String.class.getName(), 45);
         builder.addColumn("Mobile", "contact.mobile", String.class.getName(), 45);
         builder.addColumn("Address", "contact.address", String.class.getName(), 45);
+        builder.addColumn("Account Balance", "account.balance", Float.class.getName(), 45);
 
 
 

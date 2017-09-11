@@ -2,17 +2,14 @@ package com.jonycse.dynamic.jasper.example;
 
 public class Contact {
 
-    private String mobile;
-    private String address;
+    private String mobile = "12546";
+    private String address ="145, dhaka";
 
     public Contact(){
-        this.mobile = "12546";
-        this.address = "145, dhaka";
     }
 
     public Contact(String mobile){
         this.mobile = mobile;
-        this.address = "145, dhaka";
     }
 
     public String getMobile() {
