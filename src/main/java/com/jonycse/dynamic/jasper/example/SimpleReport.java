@@ -37,7 +37,8 @@ public class SimpleReport extends BaseReport {
         builder.setSubtitle("Generated on: " + new Date());
         builder.addColumn("Name", "name", String.class.getName(), 30);
         builder.addColumn("Email", "email", String.class.getName(), 45);
-        builder.addColumn("Mobile", "mobile", String.class.getName(), 45);
+        builder.addColumn("Mobile", "contact.mobile", String.class.getName(), 45);
+        builder.addColumn("Address", "contact.address", String.class.getName(), 45);
 
 
 
@@ -69,18 +70,6 @@ public class SimpleReport extends BaseReport {
         return builder.build();
     }
 
-    private Object getDataSourceReport() {
-        List<Person> lista = new ArrayList<Person>();
-        for (int i = 0; i <= 5; i++) {
-            Person persona = new Person();
-            persona.setName("Omar");
-            persona.setEmail("Velasco" + i);
-            persona.setMobile("Peña" + i);
-            lista.add(persona);
-        }
-        return lista;
-    }
-
     @Override
     public JRDataSource getDataSource() {
         List<Person> lista = new ArrayList<Person>();
@@ -88,7 +77,8 @@ public class SimpleReport extends BaseReport {
             Person persona = new Person();
             persona.setName("Bob");
             persona.setEmail("bob" + i + "@gmail.com");
-            persona.setMobile("01757-45848" + i);
+            //persona.setMobile("01757-45848" + i);
+            persona.setContact( new Contact("01757-45848" + i) );
             lista.add(persona);
         }
         for (int i = 0; i <= 90; i++) {
@@ -102,7 +92,8 @@ public class SimpleReport extends BaseReport {
             Person persona = new Person();
             persona.setName("Tom");
 //			persona.setEmail("tom" + i+"@gmail.com");
-            persona.setMobile("01505-45897" + i);
+            //persona.setMobile("01505-45897" + i);
+            persona.setContact( new Contact("01505-45897" + i) );
             lista.add(persona);
         }
         JRDataSource dataSource = new JRBeanCollectionDataSource(lista);

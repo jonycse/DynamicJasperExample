@@ -3,7 +3,7 @@ package com.jonycse.dynamic.jasper.example;
 public class Person {
 	private String name;
 	private String email;
-	private String mobile;
+	private Contact contact;
 
 	public String getName() {
 		return name;
@@ -21,12 +21,11 @@ public class Person {
 		this.email = email;
 	}
 
-	public String getMobile() {
-		return mobile;
+	public Contact getContact() {
+		return contact;
 	}
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+	public void setContact(Contact contact) {
+		this.contact = contact;
 	}
-
 }
