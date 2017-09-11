@@ -57,7 +57,7 @@ public class SimpleReport extends BaseReport {
 
             builder.addGroup(group1);
             getParams().put("paramAlgo", "Monthly");
-            builder.setTemplateFile("template-report.jrxml");
+
         } else if (reportType.equals(ReportType.EXCEL)) {
             builder.setPrintColumnNames(true);
             builder.setIgnorePagination(true); //for Excel, we may dont want pagination, just a plain list
@@ -68,6 +68,8 @@ public class SimpleReport extends BaseReport {
             builder.setPrintColumnNames(true);
             builder.setIgnorePagination(true); //for Excel, we may dont want pagination, just a plain list
         }
+
+        builder.setTemplateFile("template-report.jrxml");
         return builder.build();
     }
 
