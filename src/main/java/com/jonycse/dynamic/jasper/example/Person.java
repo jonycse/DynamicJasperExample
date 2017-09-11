@@ -1,6 +1,6 @@
 package com.jonycse.dynamic.jasper.example;
 
-public class Persona {
+public class Person {
 	private String name;
 	private String email;
 	private String mobile;
