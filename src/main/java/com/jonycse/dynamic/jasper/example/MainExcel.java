@@ -3,6 +3,9 @@ package com.jonycse.dynamic.jasper.example;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -24,13 +27,18 @@ public class MainExcel {
 		File outputFile = new File(path);
 		FileOutputStream fos = new FileOutputStream(outputFile);
 
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, report.getJasperPrint());
-		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, fos); //and output stream
+
+		exporter.setExporterInput(new SimpleExporterInput(report.getJasperPrint()));
+		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(fos));
+		SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
 
 		//Excel specific parameter
-		exporter.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.FALSE);
-		exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
-		exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
+		configuration.setOnePagePerSheet(Boolean.FALSE);
+		configuration.setRemoveEmptySpaceBetweenRows(Boolean.TRUE);
+		configuration.setWhitePageBackground(Boolean.FALSE);
+		//configuration.setDetectCellType(true);
+		//configuration.setCollapseRowSpan(false);
+		exporter.setConfiguration(configuration);
 
 		exporter.exportReport();
 
