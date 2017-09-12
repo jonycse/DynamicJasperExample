@@ -38,49 +38,66 @@ public class SimpleReport extends BaseReport {
         builder.setDetailHeight(10);
         builder.setTitle("Babel report");
         builder.setSubtitle("Generated on: " + new Date());
+
+        addColumns(builder);
+
+
+
+        if (reportType.equals(ReportType.PDF)) {
+           applyPdfSettings(builder);
+
+        } else if (reportType.equals(ReportType.EXCEL)) {
+            applyExcelSettings(builder);
+        }
+
+        builder.setTemplateFile("template-report.jrxml");
+        applyNoDataSettings(builder);
+
+        return builder.build();
+    }
+
+    private void addColumns(FastReportBuilder builder) throws ClassNotFoundException {
         builder.addColumn("Name", "name", String.class.getName(), 30);
         builder.addColumn("Email", "email", String.class.getName(), 45);
         builder.addColumn("Mobile", "contact.mobile", String.class.getName(), 45);
         builder.addColumn("Address", "contact.address", String.class.getName(), 45);
         builder.addColumn("Account Balance", "account.balance", Float.class.getName(), 45);
+    }
 
+    private void applyPdfSettings(FastReportBuilder builder){
+        // for pagination
+        builder.addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_FOOTER, AutoText.ALIGMENT_RIGHT);
 
+        builder.setPrintBackgroundOnOddRows(true);
+        builder.setUseFullPageWidth(true);
+        GroupBuilder gb1 = new GroupBuilder();
 
-        if (reportType.equals(ReportType.PDF)) {
-            // for pagination
-            builder.addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_FOOTER, AutoText.ALIGMENT_RIGHT);
+        DJGroup group1 = gb1.setCriteriaColumn((PropertyColumn) builder.getColumn(0))
+                .setGroupLayout(GroupLayout.VALUE_IN_HEADER)
+                .build();
 
-            builder.setPrintBackgroundOnOddRows(true);
-            builder.setUseFullPageWidth(true);
-            GroupBuilder gb1 = new GroupBuilder();
+        builder.addGroup(group1);
+        getParams().put("paramAlgo", "Monthly");
 
-            DJGroup group1 = gb1.setCriteriaColumn((PropertyColumn) builder.getColumn(0))
-                    .setGroupLayout(GroupLayout.VALUE_IN_HEADER)
-                    .build();
+    }
 
-            builder.addGroup(group1);
-            getParams().put("paramAlgo", "Monthly");
+    private void applyExcelSettings(FastReportBuilder builder){
+        builder.setPrintColumnNames(true);
+        builder.setIgnorePagination(true); //for Excel, we may dont want pagination, just a plain list
+        builder.setMargins(0, 0, 0, 0);
+        builder.setTitle("November 2006 sales report");
+        builder.setSubtitle("This report was generated at " + new Date());
+        builder.setUseFullPageWidth(true);
+        builder.setPrintColumnNames(true);
+        builder.setIgnorePagination(true); //for Excel, we may dont want pagination, just a plain list
+    }
 
-        } else if (reportType.equals(ReportType.EXCEL)) {
-            builder.setPrintColumnNames(true);
-            builder.setIgnorePagination(true); //for Excel, we may dont want pagination, just a plain list
-            builder.setMargins(0, 0, 0, 0);
-            builder.setTitle("November 2006 sales report");
-            builder.setSubtitle("This report was generated at " + new Date());
-            builder.setUseFullPageWidth(true);
-            builder.setPrintColumnNames(true);
-            builder.setIgnorePagination(true); //for Excel, we may dont want pagination, just a plain list
-        }
-
-        builder.setTemplateFile("template-report.jrxml");
-
+    private void applyNoDataSettings(FastReportBuilder builder){
         StyleBuilder noDataStyle=new StyleBuilder(true);
         noDataStyle.setHorizontalAlign(HorizontalAlign.CENTER);
         noDataStyle.setFont(new Font(20, Font._FONT_GEORGIA, true));
 
         builder.setWhenNoData("No data found for this report", noDataStyle.build());
-
-        return builder.build();
     }
 
     @Override
