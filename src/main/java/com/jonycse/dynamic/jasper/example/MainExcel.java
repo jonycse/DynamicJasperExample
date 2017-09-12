@@ -33,5 +33,8 @@ public class MainExcel {
 		exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
 
 		exporter.exportReport();
+
+
+		System.out.println("Class: "+Class.forName("java.lang.String").getName());
 	}
 }

@@ -70,6 +70,7 @@ public class SimpleReport extends BaseReport {
         }
 
         builder.setTemplateFile("template-report.jrxml");
+        builder.setWhenNoData("No data found for this report", null);
         return builder.build();
     }
 
