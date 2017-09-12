@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import ar.com.fdvs.dj.domain.builders.StyleBuilder;
+import ar.com.fdvs.dj.domain.constants.Font;
+import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
@@ -70,7 +73,13 @@ public class SimpleReport extends BaseReport {
         }
 
         builder.setTemplateFile("template-report.jrxml");
-        builder.setWhenNoData("No data found for this report", null);
+
+        StyleBuilder noDataStyle=new StyleBuilder(true);
+        noDataStyle.setHorizontalAlign(HorizontalAlign.CENTER);
+        noDataStyle.setFont(new Font(20, Font._FONT_GEORGIA, true));
+
+        builder.setWhenNoData("No data found for this report", noDataStyle.build());
+
         return builder.build();
     }
 
