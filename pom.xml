@@ -30,6 +30,13 @@
 			<artifactId>poi</artifactId>
 			<version>3.10-FINAL</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.2</version>
+		</dependency>
+
 
 	</dependencies>
 	<build>
