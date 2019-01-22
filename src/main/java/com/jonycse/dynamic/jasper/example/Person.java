@@ -6,9 +6,20 @@ public class Person {
 	private Contact contact;
 	private Account account;
 
+	private Integer age;
+
 	public Person(){
 		this.contact = new Contact();
 		this.account = new Account();
+		age = 5;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 
 	public String getName() {

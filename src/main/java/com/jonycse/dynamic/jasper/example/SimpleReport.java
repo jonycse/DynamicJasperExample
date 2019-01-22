@@ -59,6 +59,7 @@ public class SimpleReport extends BaseReport {
     private void addColumns(FastReportBuilder builder) throws ClassNotFoundException {
         builder.addColumn("Name", "name", String.class.getName(), 30);
         builder.addColumn("Email", "email", String.class.getName(), 45);
+        builder.addColumn("Age", "age", Integer.class.getName(), 45);
         builder.addColumn("Mobile", "contact.mobile", String.class.getName(), 45);
         builder.addColumn("Address", "contact.address", String.class.getName(), 45);
         builder.addColumn("Account Balance", "account.balance", Float.class.getName(), 45);
